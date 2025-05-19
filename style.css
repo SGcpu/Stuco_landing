@@ -1,0 +1,152 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #2d5249;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            height: 80vh;
+            background-color: white;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sidebar {
+            background-color: #0d1f1b;
+            width: 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .sidebar-icon {
+            width: 24px;
+            height: 24px;
+            margin: 15px 0;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin-bottom: 40px;
+        }
+
+        .spacer {
+            flex-grow: 1;
+        }
+
+        .profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ccc;
+            overflow: hidden;
+        }
+
+        /* New Arrivals Section */
+        .new-arrivals-container {
+            position: absolute;
+            bottom: 20px;
+            left: 100px;
+            width: 130px;
+            background-color: rgba(78, 137, 129, 0.8);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .new-arrivals-title {
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .product-thumbnail {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            /* For your tennis racket image */
+            background-image: url('path-to-racket-image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .get-now-btn {
+            background-color: #0d1f1b;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .get-now-btn:hover {
+            background-color: #164438;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .new-arrivals-container {
+                left: 80px;
+                width: 100px;
+            }
+
+            .product-image {
+                width: 60px;
+                height: 60px;
+            }
+
+            .new-arrivals-title {
+                font-size: 0.7rem;
+            }
+
+            .get-now-btn {
+                font-size: 0.6rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .new-arrivals-container {
+                position: static;
+                width: 100%;
+                margin-top: 20px;
+                margin-left: 10px;
+            }
+        }
