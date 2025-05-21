@@ -1,195 +1,284 @@
 html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-.parent {
-    display: grid;
-    grid-template-columns: 80px repeat(7, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    gap: 0;
-    height: calc(100vh - 40px);
-    width: calc(100vw - 60px);
-    margin: 20px 30px 20px 20px;
-    box-sizing: border-box;
-}
+        .parent {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            gap: 0;
+            height: calc(100vh - 40px);
+            width: calc(100vw - 60px);
+            margin: 20px 30px 20px 20px;
+            box-sizing: border-box;
+        }
 
-.div1 {
-    grid-row: span 7 / span 7;
-    grid-column-start: 1;
-    grid-row-start: 2;
-    background-color: #0d1f1b;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    color: white;
-    margin-right: 8px;
-    margin-bottom: 8px;
-}
+        .div1 {
+            grid-row: span 7 / span 7;
+            grid-column-start: 1;
+            grid-row-start: 2;
+            background-color: #0d1f1b;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1000;
+        }
 
-.div1 .sidenav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
+        .sidenav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
-.div1 .sidenav ul li {
-    margin: 40px 0;
-    cursor: pointer;
-    font-size: 1.2em;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-}
+        .sidenav ul li {
+            margin: 40px 0;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+        }
 
-.div1 .sidenav ul li bxs-icon,
-.div1 .sidenav ul li i {
-    font-size: 24px;
-    flex-shrink: 0;
-}
+        .sidenav ul li i {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
 
-.register-login-button {
-    background-color: #2d5249;
-    color: white;
-    border: none;
-    border-radius: 0;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    margin-top: 0;
-    align-self: stretch;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 7% 100%);
-    transition: background-color 0.3s ease;
-}
+        .register-login-button {
+            background-color: #2d5249;
+            color: white;
+            border: none;
+            border-radius: 0;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 0;
+            align-self: stretch;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 7% 100%);
+            transition: background-color 0.3s ease;
+        }
 
-.register-login-button:hover {
-    background-color: #24603f;
-}
+        .register-login-button:hover {
+            background-color: #24603f;
+        }
 
-.div2 {
-    grid-row: span 2 / span 2;
-    grid-column-start: 1;
-    grid-row-start: 9;
-    background-color: #2d5249;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    padding: 10px;
-    margin-right: 8px;
-}
+        .div2 {
+            grid-row: span 2 / span 2;
+            grid-column-start: 1;
+            grid-row-start: 9;
+            background-color: #2d5249;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 10px;
+            margin-right: 8px;
+        }
 
-.div3 {
-    grid-column: 2 / 5;
-    grid-row: 1 / 11;
-    background-color: #2d5249;
-    margin: 0;
-    padding: 0;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
+        .div3 {
+            grid-column: 2 / 5;
+            grid-row: 1 / 11;
+            background-color: #2d5249;
+            margin: 0;
+            padding: 0;
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
 
-.div8 {
-    grid-column: 5 / 9;
-    grid-row: 2 / 8;
-    background-color: #2d5249;
-    margin: 0;
-    padding: 0;
-    border-bottom-right-radius: 30px;
-}
+        .div8 {
+            grid-column: 5 / 9;
+            grid-row: 2 / 8;
+            background-color: #2d5249;
+            margin: 0;
+            padding: 0;
+            border-bottom-right-radius: 30px;
+        }
 
-.div7 {
-    grid-column: 8 / 9;
-    grid-row: 1 / 2;
-    background-color: #2d5249;
-    margin: 0;
-    padding: 0;
-    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
-    /* slant left border at 45deg */
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 30px;
-}
+        .div7 {
+            grid-column: 8 / 9;
+            grid-row: 1 / 2;
+            background-color: #2d5249;
+            margin: 0;
+            padding: 0;
+            clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+            border-top-right-radius: 30px;
+        }
 
-.div9 {
-    grid-column: 5 / 6;
-    grid-row: 1 / 2;
-    background-color: #2d5249;
-    margin: 0;
-    padding: 0;
-    clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
-    /* slant right border at 135deg */
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
+        .div9 {
+            grid-column: 5 / 6;
+            grid-row: 1 / 2;
+            background-color: #2d5249;
+            margin: 0;
+            padding: 0;
+            clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
+        }
 
-.div4 {
-    grid-column: span 4 / span 4;
-    grid-row: span 3 / span 3;
-    grid-column-start: 5;
-    grid-row-start: 8;
-    background-color: #0D1F1B;
-    border-radius: 30px;
-    margin-left: 8px;
-    margin-top: 8px;
-}
+        .div4 {
+            grid-column: span 4 / span 4;
+            grid-row: span 3 / span 3;
+            grid-column-start: 5;
+            grid-row-start: 8;
+            background-color: #0D1F1B;
+            border-radius: 30px;
+            margin-left: 8px;
+            margin-top: 8px;
+        }
 
-.div6 {
-    grid-column: span 2 / span 2;
-    grid-column-start: 6;
-    grid-row-start: 1;
-    margin-bottom: 8px;
-    display: flex;
-    gap: 8px;
-}
+        .div6 {
+            grid-column: span 2 / span 2;
+            grid-column-start: 6;
+            grid-row-start: 1;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 8px;
+        }
 
-.div6a, .div6b {
-    flex: 1;
-}
+        .div6a,
+        .div6b {
+            flex: 1;
+        }
 
-.register-login-button {
-    background-color: #2d5249;
-    color: white;
-    border: none;
-    border-radius: 0;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    margin-top: 0;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 7% 100%);
-    transition: background-color 0.3s ease;
-}
+        .div10 {
+            grid-column-start: 1;
+            grid-row-start: 1;
+            margin-right: 8px;
+        }
 
-.div7 {
-    grid-column-start: 8;
-    grid-row-start: 1;
-}
+        /* Sidebar toggle button styles */
+        #sidebarToggle {
+            display: none; /* Hidden by default on desktop */
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 60px;
+            background-color: #2d5249;
+            border: none;
+            color: white;
+            padding: 0;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+            z-index: 1100;
+            font-size: 1.5em;
+            align-items: center;
+            justify-content: center;
+            transition: left 0.3s ease;
+        }
 
-.div8 {
-    grid-column: span 4 / span 4;
-    grid-row: span 6 / span 6;
-    grid-column-start: 5;
-    grid-row-start: 2;
-}
+        /* Sidebar container only applied on mobile */
+        .sidebar-container {
+            display: contents; /* This makes the container act as if it's not there on desktop */
+        }
 
-.div9 {
-    grid-column-start: 5;
-    grid-row-start: 1;
-}
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            #sidebarToggle {
+                display: flex; /* Show on mobile */
+                left: 0;
+            }
 
-.div10 {
-    grid-column-start: 1;
-    grid-row-start: 1;
-    margin-right: 8px;
-}
+            .parent {
+                grid-template-columns: 0px repeat(7, 1fr);
+                width: 100vw;
+                margin: 20px 0 20px 0;
+                padding-left: 10px;
+            }
+
+            .sidebar-container {
+                display: block; /* Normal display on mobile */
+                position: fixed;
+                top: 0;
+                left: -200px;
+                width: 200px;
+                height: 100vh;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar-container.sidebar-visible {
+                left: 0;
+            }
+
+            .div1 {
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                height: calc(70vh - 50px);
+                margin: 0;
+                border-radius: 0;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+                background-color: #0d1f1b;
+            }
+
+            .div10 {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+                margin: 0;
+                border-radius: 0;
+                background-color: #2d5249;
+            }
+
+            .div2 {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 30vh;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            /* Hide toggle button when sidebar is visible */
+            .sidebar-visible-toggle #sidebarToggle {
+                left: 200px;
+            }
+
+            .sidebar-visible-toggle #sidebarToggle i {
+                transform: rotate(180deg);
+            }
+
+            .div6 {
+                flex-direction: column;
+                margin-bottom: 16px;
+            }
+
+            .div6a,
+            .div6b {
+                flex: none;
+                width: 100%;
+                height: 50px;
+                margin-bottom: 8px;
+            }
+
+            .register-login-button {
+                font-size: 1.1em;
+                clip-path: none;
+                border-radius: 8px;
+                padding: 12px 0;
+                height: 100%;
+            }
+        }
+
+        .about_page{
+            
+        }
