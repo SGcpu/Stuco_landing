@@ -7,6 +7,7 @@
     <title>Grid</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -46,7 +47,17 @@
 
     <section class="about_page">
         <div class="about_container">
-            <div class="abimage_container"></div>
+            <div class="parent1">
+                <div class="divi1">1</div>
+
+                <!-- div2 now directly contains 3 child divs -->
+                <div class="divi2">
+                    <div class="child-divi1">1</div>
+                    <div class="child-divi2">2</div>
+                    <div class="child-divi3">3</div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -76,7 +87,7 @@
 
         // Check on page load
         window.addEventListener('load', checkScreenSize);
-        
+
         // Check on resize
         window.addEventListener('resize', checkScreenSize);
     </script>
