@@ -3,6 +3,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrollbar on body if content overflows slightly */
 }
 
 .parent {
@@ -447,25 +448,43 @@ body {
     display: block;
 }
 
+/* Section Team Styles */
 .scteam {
-    background-color: #ffff;
-    height: 100%;
-    width: 100%;
+    background-color: #f0f0f0; /* Light grey background for the section */
+    height: 100vh; /* Full viewport height */
+    width: 100vw;  /* Full viewport width */
+    overflow: hidden; /* Hide parent scrollbars, manage scrolling in aboutsc-scroll */
+    box-sizing: border-box;
+    padding: 20px 0; /* Add some padding at top/bottom of the section if needed */
 }
 
-/* .aboutsc-scroll{} */
+.aboutsc-scroll {
+    display: flex; /* Lay out person divs horizontally */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    height: 100%;
+    width: 100%;
+    scroll-snap-type: x mandatory; /* Optional: snaps to the start of each person div */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
 
-.ydk {
+.person {
+    flex: 0 0 100%; /* Each person div takes 100% of the viewport width */
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    gap: 8px;
-    width: 100%;
-    height: 100vh;
-    /* Make the parent container cover the whole viewport height */
+    gap: 10px; /* Increased gap slightly */
+    padding: 20px; /* Padding within each person slide */
+    box-sizing: border-box;
+    scroll-snap-align: start; /* Align to start for snap scrolling */
+    border-right: 1px solid #ddd; /* Optional: separator between persons */
 }
 
-.ydkdiv1 {
+.person:last-child {
+    border-right: none; /* No border for the last person */
+}
+
+.person-content-block1 {
     grid-column: span 3 / span 3;
     grid-row: span 7 / span 7;
     grid-column-start: 6;
@@ -481,9 +500,10 @@ body {
     align-items: center;
     font-size: 1.5em;
     clip-path: polygon(70px 0, 100% 0, 100% 100%, 0 100%, 0 70px);
+    box-sizing: border-box;
 }
 
-.ydkdiv1 .image-placeholder {
+.person-content-block1 .image-placeholder {
     width: 90%;
     height: 90%;
     border: 3px solid white;
@@ -492,14 +512,14 @@ body {
     box-sizing: border-box;
 }
 
-.ydkdiv1 .image-placeholder img {
+.person-content-block1 .image-placeholder img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.ydkdiv2 {
+.person-content-block2 {
     grid-column: span 5 / span 5;
     grid-row: span 5 / span 5;
     grid-column-start: 1;
@@ -507,26 +527,33 @@ body {
     background-color: #2196F3;
     /* blue */
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px; /* Increased padding */
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.2em; /* Adjusted font size */
     clip-path: polygon(0 0, 25% 0, 20% 40px, 0 40px, 0 100%, 100% 100%, 100% 0);
+    box-sizing: border-box;
+    text-align: center;
 }
 
-.ydkdiv3 {
+.person-content-block3 {
     grid-column: span 5 / span 5;
     grid-row: span 4 / span 4;
-    grid-row-start: 7;
+    grid-column-start: 1; /* Ensured it starts from column 1 */
+    grid-row-start: 7; /* Starts after block2 */
     background-color: #f44336;
     /* red */
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px; /* Increased padding */
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.2em; /* Adjusted font size */
+    box-sizing: border-box;
+    text-align: center;
 }
+/* Remove old ydk styles if they are no longer needed or ensure they don't conflict */
+/* .ydk, .ydkdiv1, .ydkdiv2, .ydkdiv3 {} */
