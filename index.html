@@ -73,9 +73,13 @@
     </section>
     <section class="scteam">
         <div class="aboutsc-scroll">
-            <div class="about_ydk">
 
+            <div class="ydk">
+                <div class="ydkdiv1">1</div>
+                <div class="ydkdiv2">2</div>
+                <div class="ydkdiv3">3</div>
             </div>
+
         </div>
     </section>
 
@@ -86,73 +90,73 @@
         // Get elements
 
         document.addEventListener('DOMContentLoaded', () => {
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebarContainer = document.querySelector('.sidebar-container');
-        const body = document.body;
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarContainer = document.querySelector('.sidebar-container');
+            const body = document.body;
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-        // Crucial check: if the essential elements don't exist, stop to prevent errors.
-        if (!sidebarToggle || !sidebarContainer) {
-            console.error('Sidebar toggle button or container element not found in the DOM. Please check your HTML and script placement.');
-            return; // Exit if essential elements are missing
-        }
-
-        function closeSidebar() {
-            sidebarContainer.classList.remove('sidebar-visible');
-            body.classList.remove('sidebar-visible-toggle'); // For moving the toggle icon
-            if (sidebarOverlay) {
-                sidebarOverlay.classList.remove('active');
+            // Crucial check: if the essential elements don't exist, stop to prevent errors.
+            if (!sidebarToggle || !sidebarContainer) {
+                console.error('Sidebar toggle button or container element not found in the DOM. Please check your HTML and script placement.');
+                return; // Exit if essential elements are missing
             }
-        }
 
-        function openSidebar() {
-            sidebarContainer.classList.add('sidebar-visible');
-            body.classList.add('sidebar-visible-toggle'); // For moving the toggle icon
-            if (sidebarOverlay) {
-                sidebarOverlay.classList.add('active');
-            }
-        }
-
-        sidebarToggle.addEventListener('click', (event) => {
-            event.stopPropagation(); // Good practice to prevent event bubbling
-            if (sidebarContainer.classList.contains('sidebar-visible')) {
-                closeSidebar();
-            } else {
-                openSidebar();
-            }
-        });
-
-        // Add click listener for the overlay only if the element exists
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        function checkScreenSize() {
-            // This function might be called on resize before sidebarContainer is (re)defined
-            // in a different scope if not careful, but here it's fine due to closure.
-            if (window.innerWidth <= 768) { // Mobile view
-                closeSidebar();
-            } else { // Desktop view
-                // On desktop, CSS `display: contents` for .sidebar-container should take over.
-                // Ensure mobile-specific classes are removed.
+            function closeSidebar() {
                 sidebarContainer.classList.remove('sidebar-visible');
-                body.classList.remove('sidebar-visible-toggle');
+                body.classList.remove('sidebar-visible-toggle'); // For moving the toggle icon
                 if (sidebarOverlay) {
                     sidebarOverlay.classList.remove('active');
                 }
             }
-        }
 
-        // Set the initial state when the DOM is fully loaded and elements are found
-        checkScreenSize();
+            function openSidebar() {
+                sidebarContainer.classList.add('sidebar-visible');
+                body.classList.add('sidebar-visible-toggle'); // For moving the toggle icon
+                if (sidebarOverlay) {
+                    sidebarOverlay.classList.add('active');
+                }
+            }
 
-        // Handle window resizing with a debounce for performance
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(checkScreenSize, 250); // Adjust debounce delay as needed
+            sidebarToggle.addEventListener('click', (event) => {
+                event.stopPropagation(); // Good practice to prevent event bubbling
+                if (sidebarContainer.classList.contains('sidebar-visible')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+
+            // Add click listener for the overlay only if the element exists
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
+
+            function checkScreenSize() {
+                // This function might be called on resize before sidebarContainer is (re)defined
+                // in a different scope if not careful, but here it's fine due to closure.
+                if (window.innerWidth <= 768) { // Mobile view
+                    closeSidebar();
+                } else { // Desktop view
+                    // On desktop, CSS `display: contents` for .sidebar-container should take over.
+                    // Ensure mobile-specific classes are removed.
+                    sidebarContainer.classList.remove('sidebar-visible');
+                    body.classList.remove('sidebar-visible-toggle');
+                    if (sidebarOverlay) {
+                        sidebarOverlay.classList.remove('active');
+                    }
+                }
+            }
+
+            // Set the initial state when the DOM is fully loaded and elements are found
+            checkScreenSize();
+
+            // Handle window resizing with a debounce for performance
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(checkScreenSize, 250); // Adjust debounce delay as needed
+            });
         });
-    });
 
     </script>
 </body>
