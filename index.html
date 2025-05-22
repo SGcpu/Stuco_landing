@@ -6,11 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grid</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="test.css">
+
 </head>
 
 <body>
+    <!-- Sidebar overlay for mobile -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar toggle button for small screens -->
+    <button id="sidebarToggle" aria-label="Toggle Sidebar" title="Toggle Sidebar">
+        <i class="bx bx-chevron-right"></i>
+    </button>
+
     <section class="Landing_page">
         <div class="parent">
             <!-- Sidebar container to group the sidebar elements -->
@@ -61,39 +69,84 @@
                     <div class="child-divi3">3</div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- Sidebar toggle button for small screens -->
-    <button id="sidebarToggle" aria-label="Toggle Sidebar" title="Toggle Sidebar">
-        <i class="bx bx-chevron-right"></i>
-    </button>
 
     <script>
+        // Replace the existing script in your HTML with this updated version
+
+        // Get elements
+
+        document.addEventListener('DOMContentLoaded', () => {
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarContainer = document.querySelector('.sidebar-container');
         const body = document.body;
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebarContainer.classList.toggle('sidebar-visible');
-            body.classList.toggle('sidebar-visible-toggle');
-        });
+        // Crucial check: if the essential elements don't exist, stop to prevent errors.
+        if (!sidebarToggle || !sidebarContainer) {
+            console.error('Sidebar toggle button or container element not found in the DOM. Please check your HTML and script placement.');
+            return; // Exit if essential elements are missing
+        }
 
-        // Initialize sidebar state based on screen size
-        function checkScreenSize() {
-            if (window.innerWidth <= 768) {
-                // On mobile, make sure sidebar is hidden initially
-                sidebarContainer.classList.remove('sidebar-visible');
-                body.classList.remove('sidebar-visible-toggle');
+        function closeSidebar() {
+            sidebarContainer.classList.remove('sidebar-visible');
+            body.classList.remove('sidebar-visible-toggle'); // For moving the toggle icon
+            if (sidebarOverlay) {
+                sidebarOverlay.classList.remove('active');
             }
         }
 
-        // Check on page load
-        window.addEventListener('load', checkScreenSize);
+        function openSidebar() {
+            sidebarContainer.classList.add('sidebar-visible');
+            body.classList.add('sidebar-visible-toggle'); // For moving the toggle icon
+            if (sidebarOverlay) {
+                sidebarOverlay.classList.add('active');
+            }
+        }
 
-        // Check on resize
-        window.addEventListener('resize', checkScreenSize);
+        sidebarToggle.addEventListener('click', (event) => {
+            event.stopPropagation(); // Good practice to prevent event bubbling
+            if (sidebarContainer.classList.contains('sidebar-visible')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+
+        // Add click listener for the overlay only if the element exists
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        function checkScreenSize() {
+            // This function might be called on resize before sidebarContainer is (re)defined
+            // in a different scope if not careful, but here it's fine due to closure.
+            if (window.innerWidth <= 768) { // Mobile view
+                closeSidebar();
+            } else { // Desktop view
+                // On desktop, CSS `display: contents` for .sidebar-container should take over.
+                // Ensure mobile-specific classes are removed.
+                sidebarContainer.classList.remove('sidebar-visible');
+                body.classList.remove('sidebar-visible-toggle');
+                if (sidebarOverlay) {
+                    sidebarOverlay.classList.remove('active');
+                }
+            }
+        }
+
+        // Set the initial state when the DOM is fully loaded and elements are found
+        checkScreenSize();
+
+        // Handle window resizing with a debounce for performance
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(checkScreenSize, 250); // Adjust debounce delay as needed
+        });
+    });
+
     </script>
 </body>
 
