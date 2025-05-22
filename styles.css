@@ -432,3 +432,13 @@ body {
 #sidebarOverlay.active {
     display: block;
 }
+
+.scteam{
+    background-color: #ffff;
+    height: 100%;
+    width: 100%;
+}
+/* .aboutsc-scroll{} */
+.about_ydk{
+    
+}
