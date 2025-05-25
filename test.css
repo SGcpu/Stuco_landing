@@ -3,14 +3,14 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrollbar on body */
+    overflow-x: hidden; /* Prevent horizontal scrollbar on body if content overflows slightly */
 }
 
 .parent {
     display: grid;
     grid-template-columns: 80px repeat(7, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    gap: 0; /* Original had 0, but for mobile stacking, a gap might be added */
+    gap: 0;
     height: calc(100vh - 40px);
     width: calc(100vw - 60px);
     margin: 20px 30px 20px 20px;
@@ -89,17 +89,15 @@ body {
     margin-right: 8px;
 }
 
-/* Landing Page Grid Children - Desktop (Original Placements) */
 .div3 {
     grid-column: 2 / 5;
     grid-row: 1 / 11;
     background-color: #2d5249;
     margin: 0;
-    padding: 20px; /* Added padding for content visibility */
+    padding: 0;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    color: white; /* Added for visibility if it has text */
 }
 
 .div8 {
@@ -107,9 +105,8 @@ body {
     grid-row: 2 / 8;
     background-color: #2d5249;
     margin: 0;
-    padding: 20px; /* Added padding */
+    padding: 0;
     border-bottom-right-radius: 30px;
-    color: white; /* Added for visibility */
 }
 
 .div7 {
@@ -117,10 +114,9 @@ body {
     grid-row: 1 / 2;
     background-color: #2d5249;
     margin: 0;
-    padding: 10px; /* Added padding */
+    padding: 0;
     clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
     border-top-right-radius: 30px;
-    color: white; /* Added for visibility */
 }
 
 .div9 {
@@ -128,32 +124,28 @@ body {
     grid-row: 1 / 2;
     background-color: #2d5249;
     margin: 0;
-    padding: 10px; /* Added padding */
+    padding: 0;
     clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
-    color: white; /* Added for visibility */
 }
 
 .div4 {
     grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
     grid-column-start: 5;
-    grid-row: span 3 / span 3; /* Equivalent to 8 / 11 */
     grid-row-start: 8;
     background-color: #0D1F1B;
     border-radius: 30px;
     margin-left: 8px;
     margin-top: 8px;
-    padding: 20px; /* Added padding */
-    color: white; /* Added for visibility */
 }
 
-.div6 { /* Container for buttons */
+.div6 {
     grid-column: span 2 / span 2;
     grid-column-start: 6;
-    grid-row-start: 1; /* Occupies 1st row */
-    margin-bottom: 8px; /* Original */
+    grid-row-start: 1;
+    margin-bottom: 8px;
     display: flex;
     gap: 8px;
-    z-index: 1; /* Ensure buttons are above other stacked items if overlap occurs */
 }
 
 .div6a,
@@ -161,7 +153,7 @@ body {
     flex: 1;
 }
 
-.div10 { /* Part of sidebar logic */
+.div10 {
     grid-column-start: 1;
     grid-row-start: 1;
     margin-right: 8px;
@@ -170,6 +162,7 @@ body {
 /* Sidebar toggle button styles */
 #sidebarToggle {
     display: none;
+    /* Hidden by default on desktop */
     position: fixed;
     top: 50%;
     left: 0;
@@ -193,45 +186,116 @@ body {
 /* Sidebar container only applied on mobile */
 .sidebar-container {
     display: contents;
+    /* This makes the container act as if it's not there on desktop */
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     #sidebarToggle {
         display: flex;
+        /* Show on mobile */
         left: 0;
     }
 
     .parent {
-        /* UPDATED: Simplify to one main content column after sidebar placeholder */
-        grid-template-columns: 0px 1fr; /* Sidebar placeholder, then 1 content column */
-        grid-template-rows: auto; /* Rows will size based on content */
+        grid-template-columns: 0px repeat(7, 1fr);
         width: 100vw;
-        margin: 0; /* Remove desktop margins */
-        padding: 60px 15px 20px 15px; /* Top padding for potential fixed header, L/R/B padding */
-        gap: 15px; /* Gap between stacked items */
-        height: auto; /* Allow height to grow with content */
-        overflow-y: auto; /* Allow vertical scroll if content exceeds viewport height */
+        margin: 20px 0 20px 0;
+        padding-left: 10px;
     }
 
-    /* Stack children of .parent. Their order in HTML will influence visual order. */
-    /* Adjust grid-row and add min-height if specific heights are needed. */
-    .div6, .div7, .div9, .div3, .div8, .div4 {
-        grid-column: 2 / 3; /* All items into the single content column */
-        /* Reset original row spans that might conflict with stacking */
-        grid-row: auto;
-        margin: 0; /* Reset specific margins if any */
-        min-height: 100px; /* Example: ensure blocks have some height */
+    .sidebar-container {
+        display: block;
+        /* Normal display on mobile */
+        position: fixed;
+        top: 0;
+        left: -200px;
+        /* Hidden by default */
+        width: 200px;
+        height: 100vh;
+        z-index: 1000;
+        background-color: #0d1f1b;
+        /* Added: Match div1's background or a common sidebar bg */
+        overflow: hidden;
+        /* Added: Ensures children are clipped */
+        box-shadow: none;
+        /* Added: No shadow when hidden */
+        /* Ensure transition includes left and box-shadow if you want to animate shadow */
+        transition: left 0.3s ease, box-shadow 0.3s ease;
     }
-    
-    .div3 { min-height: 200px; } /* Example: div3 might need more height */
-    .div8 { min-height: 150px; }
-    .div4 { margin-left: 0; margin-top: 0; } /* Reset desktop offsets */
 
+    .sidebar-container.sidebar-visible {
+        left: 0;
+        /* Shown when class is added */
+        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+        /* Added: Shadow when visible */
+    }
 
-    .div6 { /* Register/Login button container - already handles internal stacking */
+    .div1 {
+        position: absolute;
+        top: 50px;
+        /* Assuming .div10 is 50px high */
+        left: 0;
+        width: 100%;
+        height: calc(70vh - 50px);
+        /* Or adjust as needed based on div10 and div2 heights */
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        /* Removed: Shadow is now on sidebar-container */
+        background-color: #0d1f1b;
+        display: flex;
         flex-direction: column;
-        /* min-height is already set above, remove if buttons define height well */
+        justify-content: center;
+        padding: 20px;
+        /* Keep original padding for content */
+        color: white;
+        /* Keep original color for content */
+    }
+
+    .div10 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        margin: 0;
+        border-radius: 0;
+        background-color: #2d5249;
+        /* Keep original background */
+    }
+
+    .div2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 30vh;
+        /* Or adjust as needed */
+        margin: 0;
+        border-radius: 0;
+        background-color: #2d5249;
+        /* Keep original background */
+        display: flex;
+        /* Keep original display properties */
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 10px;
+    }
+
+    /* Hide toggle button when sidebar is visible */
+    .sidebar-visible-toggle #sidebarToggle {
+        left: 200px;
+    }
+
+    .sidebar-visible-toggle #sidebarToggle i {
+        transform: rotate(180deg);
+    }
+
+    .div6 {
+        flex-direction: column;
+        margin-bottom: 16px;
     }
 
     .div6a,
@@ -249,186 +313,32 @@ body {
         padding: 12px 0;
         height: 100%;
     }
-
-    /* Sidebar specific styles */
-    .sidebar-container {
-        display: block;
-        position: fixed;
-        top: 0;
-        left: -200px;
-        width: 200px;
-        height: 100vh;
-        z-index: 1000;
-        background-color: #0d1f1b;
-        overflow: hidden;
-        box-shadow: none;
-        transition: left 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .sidebar-container.sidebar-visible {
-        left: 0;
-        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .div1 { /* Sidebar main content */
-        position: absolute; top: 50px; left: 0; width: 100%;
-        height: calc(70vh - 50px); margin: 0; border-radius: 0; box-shadow: none;
-        background-color: #0d1f1b; display: flex; flex-direction: column;
-        justify-content: center; padding: 20px; color: white;
-    }
-
-    .div10 { /* Sidebar top part */
-        position: absolute; top: 0; left: 0; width: 100%; height: 50px;
-        margin: 0; border-radius: 0; background-color: #2d5249;
-    }
-
-    .div2 { /* Sidebar bottom part */
-        position: absolute; bottom: 0; left: 0; width: 100%; height: 30vh;
-        margin: 0; border-radius: 0; background-color: #2d5249;
-        display: flex; justify-content: center; align-items: center;
-        color: white; padding: 10px;
-    }
-
-    .sidebar-visible-toggle #sidebarToggle { left: 200px; }
-    .sidebar-visible-toggle #sidebarToggle i { transform: rotate(180deg); }
-
-    /* About Page Responsive Changes */
-    .about_page {
-        /* Height auto or min-height depending on content */
-        height: auto;
-        min-height: 100vh; /* Ensure it can fill screen if content is short */
-        padding: 20px 0; /* Add some vertical padding */
-    }
-
-    .parent1 {
-        display: grid; /* Use grid for easier stacking and gap */
-        grid-template-columns: 1fr; /* Single column for stacking children */
-        grid-auto-rows: auto; /* Let children define their height */
-        gap: 15px; /* Gap between stacked .divi1 and .divi2 */
-        height: auto; /* Adjust from 100vh to auto for content flow */
-        padding: 15px; /* Padding for content within parent1 */
-        background-color: white;
-        box-sizing: border-box;
-    }
-
-    .divi1 {
-        grid-column: 1 / -1; /* Span full width */
-        /* clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%); */ /* Original clip-path */
-        /* Consider simplifying clip-path for mobile or ensure it looks good on a tall element */
-        min-height: 100px; /* Example height */
-        padding: 15px; /* Ensure content is visible */
-    }
-
-    .divi2 {
-        grid-column: 1 / -1; /* Span full width */
-        display: grid;
-        grid-template-columns: 1fr; /* Single column for stacking children */
-        grid-auto-rows: auto;
-        gap: 15px; /* Gap between child-divi items */
-        padding: 15px; /* Padding for content within divi2 */
-        background-color: darkblue; /* From original */
-    }
-
-    .child-divi1, .child-divi2, .child-divi3 {
-        grid-column: 1 / -1; /* Each child spans the single column */
-        width: 100%;
-        /* Set explicit height or aspect-ratio for items with images & clip-paths */
-        height: 250px; /* EXAMPLE: Adjust this height as needed */
-        position: relative; /* Already there, good for img positioning */
-        overflow: hidden; /* Already there */
-        border-radius: 5%; /* From original */
-    }
-    .child-divi1 { background-color: #d1ffd1; }
-    .child-divi2 { background-color: #b0f0b0; }
-    .child-divi3 { background-color: #8ce98c; height: 150px; /* Example for non-image div */ }
-    
-    /* Ensure images fill these new dimensions */
-    .child-divi1 img, .child-divi2 img {
-        width: 100%; height: 100%; object-fit: cover;
-        display: block; position: absolute; top: 0; left: 0;
-    }
-
-
-    /* Team Section Responsive Changes */
-    .scteam {
-        padding: 0; /* Remove section padding if cards have their own */
-        /* height: auto; min-height: 100vh; */ /* Allow scteam to size with content */
-    }
-    .aboutsc-scroll {
-        /* Horizontal scroll for cards is good, keep it */
-        padding: 20px 0; /* Vertical padding for the scroll area */
-        /* Ensure scroll snapping works well with card widths */
-        scroll-padding: 0 10px; /* Adjust so cards snap nicely if not full width */
-
-    }
-
-    .person {
-        flex: 0 0 90vw; /* Each card takes 90% of viewport width - shows a peek of next */
-        /* Or use 100% if preferred: flex: 0 0 100%; */
-        margin-right: 15px; /* Space between cards */
-        height: auto; /* Let content define height, or set fixed like 90vh */
-        min-height: 400px; /* Ensure cards have a decent minimum height */
-
-        /* UPDATED: Internal layout of person card - stack content blocks */
-        display: grid;
-        grid-template-columns: 1fr; /* Single column */
-        grid-auto-rows: auto; /* Rows based on content */
-        gap: 15px; /* Gap between stacked blocks */
-        padding: 15px; /* Padding within the card */
-        /* background-color: white; */ /* Added for card visibility */
-        border-radius: 15px; /* Added for card appearance */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added for card appearance */
-
-    }
-    .person:last-child { margin-right: 0; border-right: none;}
-
-    .person-content-block1, .person-content-block2, .person-content-block3 {
-        grid-column: 1 / -1; /* All blocks span the single column */
-        width: 100%;
-        margin: 0; /* Reset any specific margins */
-        padding: 15px; /* Add consistent padding */
-        box-sizing: border-box;
-    }
-
-    .person-content-block1 { /* Image container */
-        /* clip-path polygon will adapt. Ensure height is appropriate */
-        height: 200px; /* Example fixed height for image area */
-        border-radius: 15px 0 15px 15px; /* Adjusted */
-    }
-    .person-content-block1 .image-placeholder {
-        /* Adjust if needed, clip-path might be on parent now */
-    }
-    .person-content-block2 { /* Details */
-        /* clip-path polygon will adapt. */
-        min-height: 100px; /* Example */
-    }
-    .person-content-block3 { /* More info */
-        min-height: 100px; /* Example */
-    }
 }
 
-
-/* General Styles (already present) */
 .about_page {
     height: 100%;
     width: 100%;
     background-color: black;
 }
 
+/* Main parent grid */
 .parent1 {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    /* gap: 8px; */
     height: 100vh;
     background-color: white;
 }
 
+/* Main div1 (first grid block) */
 .divi1 {
     grid-column: span 3 / span 3;
     background-color: darkblue;
     clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
 }
 
+/* Main div2 (acts as both grid item and nested grid container) */
 .divi2 {
     grid-column: span 8 / span 8;
     grid-row: span 9 / span 9;
@@ -441,30 +351,77 @@ body {
     padding: 8px;
 }
 
+/* Nested green blocks directly inside div2 */
 .child-divi1 {
     grid-column: 1 / span 4;
     grid-row: 5 / span 5;
     position: relative;
     overflow: hidden;
-    clip-path: polygon(6% 0%, 85% 0%, 100% 30%, 100% 94%, 100% 100%, 6% 100%, 0% 100%, 0% 0%);
+    clip-path: polygon(6% 0%,
+            /* top-left notch */
+            85% 0%,
+            /* top-right notch */
+            100% 30%,
+            /* top-right notch depth */
+            100% 94%,
+            /* bottom-right notch start */
+            100% 100%,
+            /* bottom-right notch */
+            6% 100%,
+            /* bottom-left notch */
+            0% 100%,
+            /* bottom-left notch depth */
+            0% 0%
+            /* top-left notch depth */
+        );
     border-radius: 5%;
     background-color: #d1ffd1;
 }
+
 .child-divi1 img {
-    width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+
 .child-divi2 {
     grid-column: 6 / span 3;
     grid-row: 2 / span 5;
     position: relative;
     overflow: hidden;
-    clip-path: polygon(12% 0%, 100% 0%, 100% 88%, 88% 100%, 0% 100%, 0% 12%);
+    clip-path: polygon(12% 0%,
+            /* top-left notch */
+            100% 0%,
+            /* top-right */
+            100% 88%,
+            /* bottom-right notch starts */
+            88% 100%,
+            /* bottom-right notch */
+            0% 100%,
+            /* bottom-left */
+            0% 12%
+            /* top-left notch bottom */
+        );
     border-radius: 5%;
     background-color: #b0f0b0;
 }
+
 .child-divi2 img {
-    width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+
 .child-divi3 {
     grid-column: 6 / span 3;
     grid-row: 8 / span 3;
@@ -473,54 +430,130 @@ body {
 }
 
 #sidebarOverlay {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); z-index: 999; cursor: pointer;
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black */
+    z-index: 999;
+    /* Below sidebar (1000), above main content */
+    cursor: pointer;
 }
-#sidebarOverlay.active { display: block; }
 
+#sidebarOverlay.active {
+    display: block;
+}
+
+/* Section Team Styles */
 .scteam {
-    background-color: #f0f0f0; height: 100vh; width: 100vw;
-    overflow: hidden; box-sizing: border-box; padding: 20px 0;
+    background-color: #f0f0f0; /* Light grey background for the section */
+    height: 100vh; /* Full viewport height */
+    width: 100vw;  /* Full viewport width */
+    overflow: hidden; /* Hide parent scrollbars, manage scrolling in aboutsc-scroll */
+    box-sizing: border-box;
+    padding: 20px 0; /* Add some padding at top/bottom of the section if needed */
 }
+
 .aboutsc-scroll {
-    display: flex; overflow-x: auto; height: 100%; width: 100%;
-    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    display: flex; /* Lay out person divs horizontally */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    height: 100%;
+    width: 100%;
+    scroll-snap-type: x mandatory; /* Optional: snaps to the start of each person div */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
+
 .person {
-    flex: 0 0 100%; height: 100%; display: grid;
-    grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(10, 1fr);
-    gap: 10px; padding: 20px; box-sizing: border-box;
-    scroll-snap-align: start; border-right: 1px solid #ddd;
+    flex: 0 0 100%; /* Each person div takes 100% of the viewport width */
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 10px; /* Increased gap slightly */
+    padding: 20px; /* Padding within each person slide */
+    box-sizing: border-box;
+    scroll-snap-align: start; /* Align to start for snap scrolling */
+    border-right: 1px solid #ddd; /* Optional: separator between persons */
 }
-.person:last-child { border-right: none; }
+
+.person:last-child {
+    border-right: none; /* No border for the last person */
+}
 
 .person-content-block1 {
-    grid-column: span 3 / span 3; grid-row: span 7 / span 7;
-    grid-column-start: 6; grid-row-start: 2; background-color: #4CAF50;
-    border-radius: 30px 0 30px 30px; padding: 10px; color: white;
-    display: flex; justify-content: center; align-items: center; font-size: 1.5em;
-    clip-path: polygon(70px 0, 100% 0, 100% 100%, 0 100%, 0 70px); box-sizing: border-box;
-}
-.person-content-block1 .image-placeholder {
-    width: 90%; height: 90%; border: 3px solid white;
+    grid-column: span 3 / span 3;
+    grid-row: span 7 / span 7;
+    grid-column-start: 6;
+    grid-row-start: 2;
+    background-color: #4CAF50;
+    /* green */
+    border-radius: 30px 0 30px 30px;
+    /* rounded corners except top-left */
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
     clip-path: polygon(70px 0, 100% 0, 100% 100%, 0 100%, 0 70px);
-    overflow: hidden; box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+.person-content-block1 .image-placeholder {
+    width: 90%;
+    height: 90%;
+    border: 3px solid white;
+    clip-path: polygon(70px 0, 100% 0, 100% 100%, 0 100%, 0 70px);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
 .person-content-block1 .image-placeholder img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
+
 .person-content-block2 {
-    grid-column: span 5 / span 5; grid-row: span 5 / span 5;
-    grid-column-start: 1; grid-row-start: 2; background-color: #2196F3;
-    border-radius: 10px; padding: 20px; color: white; display: flex;
-    justify-content: center; align-items: center; font-size: 1.2em;
+    grid-column: span 5 / span 5;
+    grid-row: span 5 / span 5;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    background-color: #2196F3;
+    /* blue */
+    border-radius: 10px;
+    padding: 20px; /* Increased padding */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em; /* Adjusted font size */
     clip-path: polygon(0 0, 25% 0, 20% 40px, 0 40px, 0 100%, 100% 100%, 100% 0);
-    box-sizing: border-box; text-align: center;
+    box-sizing: border-box;
+    text-align: center;
 }
+
 .person-content-block3 {
-    grid-column: span 5 / span 5; grid-row: span 4 / span 4;
-    grid-column-start: 1; grid-row-start: 7; background-color: #f44336;
-    border-radius: 10px; padding: 20px; color: white; display: flex;
-    justify-content: center; align-items: center; font-size: 1.2em;
-    box-sizing: border-box; text-align: center;
+    grid-column: span 5 / span 5;
+    grid-row: span 4 / span 4;
+    grid-column-start: 1; /* Ensured it starts from column 1 */
+    grid-row-start: 7; /* Starts after block2 */
+    background-color: #f44336;
+    /* red */
+    border-radius: 10px;
+    padding: 20px; /* Increased padding */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em; /* Adjusted font size */
+    box-sizing: border-box;
+    text-align: center;
 }
+/* Remove old ydk styles if they are no longer needed or ensure they don't conflict */
+/* .ydk, .ydkdiv1, .ydkdiv2, .ydkdiv3 {} */
