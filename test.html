@@ -1,280 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grid</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Student Council</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="test.css">
 </head>
-
 <body>
-    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+    <div class="cursor"></div>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
 
-    <button id="sidebarToggle" aria-label="Toggle Sidebar" title="Toggle Sidebar">
-        <i class="bx bx-chevron-right"></i>
-    </button>
-
-    <section class="Landing_page">
-        <div class="parent">
-            <div class="sidebar-container">
-                <div class="div10">10</div>
-                <div class="div1">
-                    <nav class="sidenav">
-                        <ul>
-                            <li><i class="bx bx-info-circle"></i></li>
-                            <li><i class="bx bx-calendar"></i></li>
-                            <li><i class="bx bx-group"></i></li>
-                            <li><i class="bx bx-phone"></i></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="div2">2</div>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">ESC</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-
-            <div class="div3">3</div>
-            <div class="div4">4</div>
-            <div class="div6">
-                <div class="div6a">
-                    <button class="register-login-button">Register</button>
-                </div>
-                <div class="div6b">
-                    <button class="register-login-button">Login</button>
-                </div>
-            </div>
-            <div class="div7">7</div>
-            <div class="div8">8</div>
-            <div class="div9">9</div>
         </div>
-    </section>
+    </nav>
 
-    <section class="about_page">
-        <div class="about_container">
-            <div class="parent1">
-                <div class="divi1">1</div>
-
-                <div class="divi2">
-                    <div class="child-divi1">
-                        <img src="your-image-path.jpg" alt="Anime Character" />
-                    </div>
-                    <div class="child-divi2">
-                        <img src="your-image-path.jpg" alt="Anime Character 2" />
-                    </div>
-                    <div class="child-divi3">3</div>
-                </div>
+    <section class="hero" id="home">
+        <canvas class="hero-3d-canvas" id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-subtitle">Welcome to the Future</div>
+            <h1>Engineering Student Council</h1>
+            <p class="hero-description">
+                Pioneering innovation, fostering collaboration, and shaping the next generation of engineers through cutting-edge technology and visionary leadership.
+            </p>
+            <div class="cta-buttons">
+                <a href="#about" class="cta-btn cta-primary">
+                    <i class="fas fa-rocket"></i>
+                    Explore Innovation
+                </a>
+                <a href="#events" class="cta-btn cta-secondary">
+                    <i class="fas fa-calendar"></i>
+                    Join Events
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="scteam">
-        <div class="aboutsc-scroll">
-            <div class="person person1">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/FF0000/FFFFFF?Text=Person+1" alt="Person 1 Image" />
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About ESC</h2>
+            <div class="glass-container fade-in">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h3>Innovation at the Core</h3>
+                        <p>The Engineering Student Council represents the pinnacle of academic excellence and technological innovation. We are a community of forward-thinking engineers, designers, and visionaries committed to pushing the boundaries of what's possible.</p>
+                        <h3>Our Mission</h3>
+                        <p>To empower engineering students by providing resources, organizing impactful events, and fostering a collaborative environment where ideas flourish and futures are built.</p>
+                        <h3>Why Join Us?</h3>
+                        <p>Be part of a dynamic community, gain hands-on experience, network with industry leaders, and contribute to projects that make a real difference.</p>
+                    </div>
+                    <div class="about-visual">
+                         <div id="about-3d-visual"></div> <div class="floating-shapes">
+                           <div class="floating-shape"></div>
+                           <div class="floating-shape"></div>
+                           <div class="floating-shape"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="person-content-block2">Person 1 - Details</div>
-                <div class="person-content-block3">Person 1 - More Info</div>
-            </div>
-            <div class="person person2">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/00FF00/FFFFFF?Text=Person+2" alt="Person 2 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 2 - Details</div>
-                <div class="person-content-block3">Person 2 - More Info</div>
-            </div>
-            <div class="person person3">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/0000FF/FFFFFF?Text=Person+3" alt="Person 3 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 3 - Details</div>
-                <div class="person-content-block3">Person 3 - More Info</div>
-            </div>
-            <div class="person person4">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/FFFF00/000000?Text=Person+4" alt="Person 4 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 4 - Details</div>
-                <div class="person-content-block3">Person 4 - More Info</div>
-            </div>
-            <div class="person person5">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/FF00FF/FFFFFF?Text=Person+5" alt="Person 5 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 5 - Details</div>
-                <div class="person-content-block3">Person 5 - More Info</div>
-            </div>
-            <div class="person person6">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/00FFFF/000000?Text=Person+6" alt="Person 6 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 6 - Details</div>
-                <div class="person-content-block3">Person 6 - More Info</div>
-            </div>
-            <div class="person person7">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/800000/FFFFFF?Text=Person+7" alt="Person 7 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 7 - Details</div>
-                <div class="person-content-block3">Person 7 - More Info</div>
-            </div>
-            <div class="person person8">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/008000/FFFFFF?Text=Person+8" alt="Person 8 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 8 - Details</div>
-                <div class="person-content-block3">Person 8 - More Info</div>
-            </div>
-            <div class="person person9">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/000080/FFFFFF?Text=Person+9" alt="Person 9 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 9 - Details</div>
-                <div class="person-content-block3">Person 9 - More Info</div>
-            </div>
-            <div class="person person10">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/808000/FFFFFF?Text=Person+10" alt="Person 10 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 10 - Details</div>
-                <div class="person-content-block3">Person 10 - More Info</div>
-            </div>
-            <div class="person person11">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/800080/FFFFFF?Text=Person+11" alt="Person 11 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 11 - Details</div>
-                <div class="person-content-block3">Person 11 - More Info</div>
-            </div>
-            <div class="person person12">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/008080/FFFFFF?Text=Person+12" alt="Person 12 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 12 - Details</div>
-                <div class="person-content-block3">Person 12 - More Info</div>
-            </div>
-            <div class="person person13">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/C0C0C0/000000?Text=Person+13" alt="Person 13 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 13 - Details</div>
-                <div class="person-content-block3">Person 13 - More Info</div>
-            </div>
-            <div class="person person14">
-                <div class="person-content-block1">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/300x200/F0F0F0/000000?Text=Person+14" alt="Person 14 Image" />
-                    </div>
-                </div>
-                <div class="person-content-block2">Person 14 - Details</div>
-                <div class="person-content-block3">Person 14 - More Info</div>
             </div>
         </div>
     </section>
 
+    <section class="section" id="events">
+        <div class="container">
+            <h2 class="section-title fade-in">Upcoming Events</h2>
+            <div class="events-grid">
+                <div class="event-card fade-in">
+                    <div class="event-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Tech Symposium 2025</h3>
+                    <div class="event-date">Oct 15, 2025</div>
+                    <p>Join us for a day of talks and workshops from industry leaders on AI, Robotics, and Sustainable Tech.</p>
+                </div>
+                <div class="event-card fade-in">
+                    <div class="event-icon"><i class="fas fa-code"></i></div>
+                    <h3>HoloHackathon</h3>
+                    <div class="event-date">Nov 5-7, 2025</div>
+                    <p>A 48-hour coding challenge focused on creating immersive AR/VR experiences. Prizes and glory await!</p>
+                </div>
+                <div class="event-card fade-in">
+                    <div class="event-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Project Showcase</h3>
+                    <div class="event-date">Dec 1, 2025</div>
+                    <p>See the amazing projects our members have been working on throughout the semester.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        // Replace the existing script in your HTML with this updated version
+    <section class="section stats-section fade-in" id="stats">
+        <div class="container">
+             <h2 class="section-title fade-in">Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">Events Hosted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="1200">0</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="30">0</div>
+                    <div class="stat-label">Industry Partners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-label">Projects Funded</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Get elements
+    <section class="section" id="team">
+        <div class="container team-section">
+            <h2 class="section-title fade-in">Meet the Council</h2>
+            <div class="team-grid">
+                <div class="member-card fade-in">
+                    <div class="member-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="member-name">Alex Johnson</div>
+                    <div class="member-role">President</div>
+                </div>
+                 <div class="member-card fade-in">
+                    <div class="member-avatar"><i class="fas fa-user-cog"></i></div>
+                    <div class="member-name">Sarah Chen</div>
+                    <div class="member-role">VP Technology</div>
+                </div>
+                 <div class="member-card fade-in">
+                    <div class="member-avatar"><i class="fas fa-user-friends"></i></div>
+                    <div class="member-name">Mike Rodriguez</div>
+                    <div class="member-role">VP Events</div>
+                </div>
+                 <div class="member-card fade-in">
+                    <div class="member-avatar"><i class="fas fa-user-check"></i></div>
+                    <div class="member-name">Emily White</div>
+                    <div class="member-role">Secretary</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebarContainer = document.querySelector('.sidebar-container');
-            const body = document.body;
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <div class="glass-container fade-in contact-section">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <span>Engineering Hub, Tech University</span>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <span>contact@esc-email.com</span>
+                        </div>
+                         <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <span>(123) 456-7890</span>
+                        </div>
+                    </div>
+                     <div class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <form id="contact-form">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                            <button type="submit" class="cta-btn cta-primary">Send <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Crucial check: if the essential elements don't exist, stop to prevent errors.
-            if (!sidebarToggle || !sidebarContainer) {
-                console.error('Sidebar toggle button or container element not found in the DOM. Please check your HTML and script placement.');
-                return; // Exit if essential elements are missing
-            }
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Engineering Student Council. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
 
-            function closeSidebar() {
-                sidebarContainer.classList.remove('sidebar-visible');
-                body.classList.remove('sidebar-visible-toggle'); // For moving the toggle icon
-                if (sidebarOverlay) {
-                    sidebarOverlay.classList.remove('active');
-                }
-            }
 
-            function openSidebar() {
-                sidebarContainer.classList.add('sidebar-visible');
-                body.classList.add('sidebar-visible-toggle'); // For moving the toggle icon
-                if (sidebarOverlay) {
-                    sidebarOverlay.classList.add('active');
-                }
-            }
-
-            sidebarToggle.addEventListener('click', (event) => {
-                event.stopPropagation(); // Good practice to prevent event bubbling
-                if (sidebarContainer.classList.contains('sidebar-visible')) {
-                    closeSidebar();
-                } else {
-                    openSidebar();
-                }
-            });
-
-            // Add click listener for the overlay only if the element exists
-            if (sidebarOverlay) {
-                sidebarOverlay.addEventListener('click', closeSidebar);
-            }
-
-            function checkScreenSize() {
-                // This function might be called on resize before sidebarContainer is (re)defined
-                // in a different scope if not careful, but here it's fine due to closure.
-                if (window.innerWidth <= 768) { // Mobile view
-                    closeSidebar();
-                } else { // Desktop view
-                    // On desktop, CSS `display: contents` for .sidebar-container should take over.
-                    // Ensure mobile-specific classes are removed.
-                    sidebarContainer.classList.remove('sidebar-visible');
-                    body.classList.remove('sidebar-visible-toggle');
-                    if (sidebarOverlay) {
-                        sidebarOverlay.classList.remove('active');
-                    }
-                }
-            }
-
-            // Set the initial state when the DOM is fully loaded and elements are found
-            checkScreenSize();
-
-            // Handle window resizing with a debounce for performance
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(checkScreenSize, 250); // Adjust debounce delay as needed
-            });
-        });
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="test.js"></script>
 </body>
-
 </html>
