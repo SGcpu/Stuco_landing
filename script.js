@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded and parsed. Initializing Student Council scripts (v2 updates)...");
 
+    // Mobile viewport height fix
+    function setVhVariable() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    window.addEventListener('resize', setVhVariable);
+    window.addEventListener('orientationchange', setVhVariable);
+    setVhVariable(); // Initial call
+
     if (typeof THREE === 'undefined') {
         console.error("THREE.js is not loaded! 3D features will be disabled.");
         const threeDependentSelectors = [
@@ -92,7 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         // Call onResize once initially in case parent dimensions are set
-        setTimeout(onResize, 0);
+        // Changed from setTimeout(onResize, 0) to requestAnimationFrame(onResize)
+        requestAnimationFrame(onResize); 
         window.addEventListener('resize', onResize);
 
 

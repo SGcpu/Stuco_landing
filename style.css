@@ -23,6 +23,7 @@
     --success: #00b894;
     --warning: #fdcb6e;
     --error: #d63031;
+    /* --vh will be set by JavaScript */
 }
 
 body {
@@ -118,7 +119,9 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    /* Use JS-calculated vh for min-height for better mobile compatibility */
+    min-height: calc(var(--vh, 1vh) * 100); 
+    display: flex; align-items: center; justify-content: center;
     text-align: center; position: relative; overflow: hidden; padding-top: var(--navbar-height);
 }
 .hero-3d-canvas { /* This is #hero-main-canvas */
@@ -277,14 +280,14 @@ h1#hero-3d-typography {
 }
 
 /* --- Events Section Specific Containers --- */
-.three-js-timeline-container {
-    min-height: 728px; /* Increased size */
-    width: 100%; max-width: 1000px; /* Increased width */
+/* .three-js-timeline-container {
+    min-height: 728px; 
+    width: 100%; max-width: 1000px; 
     margin: 1rem auto 3rem; 
     position: relative; padding: 1.5rem; 
     border: 1px solid rgba(var(--cyber-blue), 0.15); border-radius: 20px; 
     background: rgba(var(--darker), 0.4);
-}
+} */
 .three-js-calendar-container {
     min-height: 220px; width: 220px; 
     margin: 1rem auto 3rem; position: relative; 
@@ -327,6 +330,121 @@ h1#hero-3d-typography {
 }
 .event-card:hover .event-portal-preview { opacity: 1; }
 
+
+/* === Added/Updated for 2D Timeline Styling === */
+.timeline-container-2d {
+    position: relative;
+    max-width: 800px; /* Max width of the timeline container */
+    margin: 2rem auto; /* Centering the timeline */
+    padding: 20px 0;
+}
+
+.timeline-container-2d::before { /* The central timeline bar */
+    content: '';
+    position: absolute;
+    left: 20px; /* Default for left-aligned items on small screens */
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: rgba(var(--cyber-blue), 0.3);
+    border-radius: 2px;
+}
+
+.timeline-item-2d {
+    position: relative;
+    margin-bottom: 30px; /* Space between timeline items */
+    padding-left: 50px; /* Space for dot and from line */
+}
+
+.timeline-dot-2d {
+    position: absolute;
+    /* Calculate left to center the dot on the 4px line, considering dot's 18px width */
+    left: calc(20px - (18px / 2) + (4px / 2)); 
+    top: 5px; /* Align with text or adjust as needed */
+    width: 18px;
+    height: 18px;
+    background: var(--cyber-blue);
+    border: 3px solid var(--dark); /* Match body background for 'cutout' effect */
+    border-radius: 50%;
+    z-index: 1; /* Above the line */
+}
+
+.timeline-content-2d {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--cyber-blue), 0.15);
+    position: relative; /* For potential ::before arrow */
+}
+.timeline-content-2d h4 {
+    color: var(--cyber-blue);
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+.timeline-content-2d p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+.timeline-content-2d span {
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+/* For larger screens, create a centered, alternating timeline effect */
+@media (min-width: 768px) {
+    .timeline-container-2d::before {
+        left: 50%;
+        margin-left: -2px; /* Center the 4px line */
+    }
+    .timeline-item-2d {
+        padding-left: 0; /* Reset padding */
+        width: 50%; /* Each item takes half width */
+        margin-bottom: 50px; 
+    }
+    .timeline-item-2d:nth-child(odd) { /* Items on the left */
+        left: 0; /* Align to the left half */
+        padding-right: calc(25px + 4px); /* Space from center line (25px content space + half line width) */
+        text-align: right;
+    }
+    .timeline-item-2d:nth-child(even) { /* Items on the right */
+        left: 50%; /* Align to the right half */
+        padding-left: calc(25px + 4px); /* Space from center line */
+        text-align: left;
+    }
+
+    /* Position dots on the center line for alternating items */
+    .timeline-item-2d:nth-child(odd) .timeline-dot-2d {
+        right: calc(-18px / 2 - 2px); /* (DotWidth/2) + (LineWidth/2) from the right edge of the item's 50% width */
+        left: auto;
+    }
+    .timeline-item-2d:nth-child(even) .timeline-dot-2d {
+        left: calc(-18px / 2 - 2px); /* (DotWidth/2) + (LineWidth/2) from the left edge of the item's 50% width */
+    }
+    /* Optional: Add arrows to content boxes */
+    .timeline-content-2d::before {
+        content: "";
+        position: absolute;
+        top: 15px; /* Align with dot or content */
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+    .timeline-item-2d:nth-child(odd) .timeline-content-2d::before {
+        right: -10px; /* Pointing right */
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent rgba(var(--cyber-blue),0.15);
+    }
+     .timeline-item-2d:nth-child(even) .timeline-content-2d::before {
+        left: -10px; /* Pointing left */
+        border-width: 10px 10px 10px 0;
+        border-color: transparent rgba(var(--cyber-blue),0.15) transparent transparent;
+    }
+}
+/* === End of 2D Timeline Styling === */
+
+
 /* --- Team Section Specific Containers --- */
 .team-section {
     background: linear-gradient(135deg, rgba(0,245,255,0.05), rgba(138,43,226,0.05));
@@ -368,7 +486,7 @@ h1#hero-3d-typography {
     padding: 1rem;
     text-align: center;
     min-width: 150px; /* Minimum width for a node */
-    max-width: 200px; /* Maximum width for a node */
+    /* max-width: 200px; /* Maximum width for a node - will be controlled by flex-basis */
     box-shadow: 0 5px 15px rgba(0, 245, 255, 0.1);
     position: relative; /* For connectors */
     display: flex;
@@ -451,7 +569,7 @@ h1#hero-3d-typography {
     justify-content: center; /* Center nodes if they don't fill the width */
 }
 .department-node {
-    min-width: 120px;
+    min-width: 120px; /* Original min-width */
     padding: 0.8rem;
 }
 
@@ -589,18 +707,22 @@ h1#hero-3d-typography {
 @media (max-width: 992px) {
     .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-visual { min-height: 300px; }
-    .three-js-timeline-container { min-height: 220px; max-width: 90%; } /* Adjusted */
+    /* .three-js-timeline-container { min-height: 220px; max-width: 90%; } /* Adjusted */
     /* .three-js-organigram-container { min-height: 300px; max-width: 90%; } */
     .three-js-calendar-container { min-height: 200px; width: 200px; }
     .three-js-chart-container { min-height: 280px; max-width: 90%; }
 
     .organigram-level.department-level {
-        flex-direction: row; /* Keep horizontal on tablet */
-        flex-wrap: wrap;
-        justify-content: center;
+        /* flex-direction: row; /* Already default for .organigram-level */
+        /* flex-wrap: wrap; /* Already default for .organigram-level */
+        /* justify-content: center; /* Already default for .organigram-level */
+        /* gap is 15px for .department-level */
     }
     .department-node {
-        flex-basis: calc(33.33% - 20px); /* Approx 3 per row */
+        /* Approx 3 per row for 992px, gap is 15px on .department-level */
+        flex-basis: calc((100% - 2 * 15px) / 3); /* Adjusts to 3 items with 15px gap */
+        max-width: calc((100% - 2 * 15px) / 3);
+        /* width: calc((100% - 2 * 15px) / 3); /* Explicit width */
     }
 
 }
@@ -617,39 +739,47 @@ h1#hero-3d-typography {
     .cta-buttons {flex-direction:column; align-items:center;}
     h1#hero-3d-typography { font-size: clamp(2.2rem, 10vw, 3.5rem); }
     .section-title { font-size: clamp(1.8rem, 8vw, 2.8rem); }
-    .three-js-timeline-container { min-height: 200px; padding: 1rem; } /* Adjusted */
+    /* .three-js-timeline-container { min-height: 200px; padding: 1rem; } /* Adjusted */
     /* .three-js-organigram-container { min-height: 250px; } */
     .three-js-calendar-container { min-height: 180px; width: 180px; }
     .three-js-chart-container { min-height: 240px; }
     .member-card { padding: 1.5rem; }
 
     .organigram-level.department-level {
-        flex-direction: column; /* Stack department nodes */
-        align-items: center;
+        flex-direction: row; /* Ensure it wraps, not stacks as a single column */
+        /* gap: 15px; /* Inherited */
     }
     .department-node {
-        width: 80%; /* Wider for stacked view */
-        max-width: 300px;
-        margin-bottom: 15px;
+        /* Target 2 department nodes per row, gap is 15px on .department-level */
+        flex-basis: calc(50% - (15px / 2)); 
+        max-width: calc(50% - (15px / 2));
+        /* width: calc(50% - (15px / 2)); /* Explicit width */
+        margin-bottom: 20px; /* Vertical spacing for wrapped rows */
     }
-    .organigram-sub-level {
+    .organigram-sub-level { /* If parent .department-node becomes narrower, sub-nodes might need to stack */
         flex-direction: column;
         align-items: center;
     }
     .organigram-sub-level::before { display: none; } /* Hide horizontal connector for stacked sub-nodes */
-    .sub-node { width: 90%; margin-bottom: 10px;}
     .sub-node::after { /* Ensure vertical connector still points upwards */
         bottom: 100%; top: auto; 
     }
-    .organigram-connector.wide { width: 2px; height: 30px; } /* Stack connector */
-
+    .organigram-connector.wide { /* This was for connecting GENSEC to 12 nodes */
+        /* If GENSEC is above a wrapping row of dept nodes, it might still be wide, or become a simple vertical connector */
+        /* For simplicity, let's assume it might need to become more like a standard connector if space is tight */
+         width: 2px; height: 30px; /* Fallback to vertical if Gensec -> Dept Head line is single point */
+    }
 }
 @media (max-width: 480px) {
-    .department-node {
-        flex-basis: calc(50% - 15px); /* Approx 2 per row for small mobile if not stacked by 768px */
-    }
      .logo-link { font-size: 1.3rem; }
      .logo-svg { height: 30px; }
+    .department-node {
+        /* Target 1 department node per row */
+        flex-basis: 100%; 
+        max-width: 100%;
+        /* width: 100%; /* Explicit width */
+    }
+    /* .sub-node stacking from 768px rule is fine here */
 }
 
 
